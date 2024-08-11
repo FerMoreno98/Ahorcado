@@ -47,6 +47,12 @@ class LaminaAhorcado extends JPanel{
 	
 	private String [] palabras= {"camarero", "fotografia", "monitor", "bufanda"};
 	
+	private int indice=0;
+	
+	private String palabraEscogida=palabras[indice];
+	
+	private JButton boton;
+	
 	public LaminaAhorcado() {
 		
 		setLayout(new BorderLayout());
@@ -57,59 +63,59 @@ class LaminaAhorcado extends JPanel{
 		
 		laminaLetras.setLayout(new GridLayout(3,9,5,5));
 		
-		CreaBotones("A");
+		CreaBotones("a");
 		
-		CreaBotones("B");
+		CreaBotones("b");
 		
-		CreaBotones("C");
+		CreaBotones("c");
 		
-		CreaBotones("D");
+		CreaBotones("d");
 		
-		CreaBotones("E");
+		CreaBotones("e");
 		
-		CreaBotones("F");
+		CreaBotones("f");
 		
-		CreaBotones("G");
+		CreaBotones("g");
 		
-		CreaBotones("H");
+		CreaBotones("h");
 		
-		CreaBotones("I");
+		CreaBotones("i");
 		
-		CreaBotones("J");
+		CreaBotones("j");
 		
-		CreaBotones("K");
+		CreaBotones("k");
 		
-		CreaBotones("L");
+		CreaBotones("l");
 		
-		CreaBotones("M");
+		CreaBotones("m");
 		
-		CreaBotones("N");
+		CreaBotones("n");
 		
-		CreaBotones("Ñ");
+		CreaBotones("ñ");
 		
-		CreaBotones("O");
+		CreaBotones("o");
 		
-		CreaBotones("P");
+		CreaBotones("p");
 		
-		CreaBotones("Q");
+		CreaBotones("q");
 		
-		CreaBotones("R");
+		CreaBotones("r");
 		
-		CreaBotones("S");
+		CreaBotones("s");
 		
-		CreaBotones("T");
+		CreaBotones("t");
 		
-		CreaBotones("U");
+		CreaBotones("u");
 		
-		CreaBotones("V");
+		CreaBotones("v");
 		
-		CreaBotones("W");
+		CreaBotones("w");
 		
-		CreaBotones("X");
+		CreaBotones("x");
 		
-		CreaBotones("Y");
+		CreaBotones("y");
 		
-		CreaBotones("Z");
+		CreaBotones("z");
 		
 		add(laminaLetras,BorderLayout.SOUTH);
 		
@@ -121,9 +127,11 @@ class LaminaAhorcado extends JPanel{
 	
 	public void CreaBotones(String texto) {
 		
-		JButton boton=new JButton(texto);
+		boton=new JButton(texto);
 		
 		laminaLetras.add(boton);
+		
+		boton.addActionListener(new AccionLetras());
 		
 	}
 	
@@ -134,6 +142,29 @@ class LaminaAhorcado extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			
+			JButton botonPulsado=(JButton)e.getSource();
+			
+			String letraPulsada=botonPulsado.getText();
+			
+			
+			
+			for (int i = 0; i < palabraEscogida.length(); i++) {
+				
+				char c=palabraEscogida.charAt(i);
+				
+				
+				
+				if(letraPulsada.equals(String.valueOf(c))) {
+					
+					botonPulsado.setBackground(Color.green);
+					
+					System.out.println("letra correcta");
+				
+				}
+				
+				
+			}
 			
 			
 			
@@ -146,9 +177,7 @@ class LaminaAhorcado extends JPanel{
 		
 		super.paintComponent(g);
 		
-		int indice=1;
-		
-		String palabraEscogida=palabras[indice];
+	
 		
 		int longitudPalabra=palabraEscogida.length();
 		
@@ -180,7 +209,7 @@ class LaminaAhorcado extends JPanel{
 		
 		
 		
-	indice++;	
+	//indice++;	
 	}
 	
 }
