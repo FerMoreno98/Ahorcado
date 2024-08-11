@@ -53,6 +53,10 @@ class LaminaAhorcado extends JPanel{
 	
 	private JButton boton;
 	
+	private JLabel palabraConRayas;
+	
+	private String palabraConRayasSTR=crearRayas(palabras[indice]);
+	
 	public LaminaAhorcado() {
 		
 		setLayout(new BorderLayout());
@@ -120,6 +124,17 @@ class LaminaAhorcado extends JPanel{
 		add(laminaLetras,BorderLayout.SOUTH);
 		
 		
+		palabraConRayas=new JLabel(palabraConRayasSTR);
+		
+		palabraConRayas.setFont(new Font("Arial",Font.PLAIN,50));
+		
+		JPanel laminaPalabra=new JPanel();
+		
+		add(laminaPalabra,BorderLayout.CENTER);
+		
+		
+		laminaPalabra.add(palabraConRayas);
+		
 		
 		
 		
@@ -147,6 +162,10 @@ class LaminaAhorcado extends JPanel{
 			
 			String letraPulsada=botonPulsado.getText();
 			
+			boolean letraCorrecta=false;
+			
+			
+			StringBuilder palabraActualizada=new StringBuilder(palabraConRayasSTR);
 			
 			
 			for (int i = 0; i < palabraEscogida.length(); i++) {
@@ -154,15 +173,29 @@ class LaminaAhorcado extends JPanel{
 				char c=palabraEscogida.charAt(i);
 				
 				
-				
 				if(letraPulsada.equals(String.valueOf(c))) {
 					
 					botonPulsado.setBackground(Color.green);
 					
-					System.out.println("letra correcta");
+					palabraActualizada.setCharAt(i, c);
+					
+					letraCorrecta=true;
+					
+					break;
 				
 				}
 				
+				
+			}
+			
+			palabraConRayas.setText(palabraActualizada.toString());
+			
+			
+			
+			
+			if(!letraCorrecta) {
+				
+				botonPulsado.setBackground(Color.red);
 				
 			}
 			
@@ -173,7 +206,7 @@ class LaminaAhorcado extends JPanel{
 	}
 	
 	
-	public void paintComponent(Graphics g) {
+	/*public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
 		
@@ -209,7 +242,22 @@ class LaminaAhorcado extends JPanel{
 		
 		
 		
-	//indice++;	
+	
+	}*/
+	
+	public String crearRayas(String palabra) {
+		
+		String nuevaPalabra="";
+	
+		
+		for (int i = 0; i < palabra.length(); i++) {
+		
+			nuevaPalabra+="-";
+			
+		}
+		
+		return nuevaPalabra;
+		
 	}
 	
 }
