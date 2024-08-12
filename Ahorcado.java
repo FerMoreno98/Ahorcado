@@ -181,7 +181,7 @@ class LaminaAhorcado extends JPanel{
 					
 					letraCorrecta=true;
 					
-					break;
+					//break;
 				
 				}
 				
@@ -189,6 +189,8 @@ class LaminaAhorcado extends JPanel{
 			}
 			
 			palabraConRayas.setText(palabraActualizada.toString());
+			
+			palabraConRayasSTR=palabraActualizada.toString();
 			
 			
 			
