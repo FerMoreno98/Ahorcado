@@ -51,8 +51,6 @@ class LaminaAhorcado extends JPanel{
 	
 	private int indice=0;
 	
-	private String palabraEscogida;
-	
 	private JButton boton, contador;
 	
 	private JLabel palabraConRayas;
@@ -129,7 +127,7 @@ class LaminaAhorcado extends JPanel{
 		
 		add(laminaLetras,BorderLayout.SOUTH);
 		
-		palabraEscogida=palabras[indice];
+		palabraEscogida(palabras[indice]);
 		
 		palabraConRayasSTR=crearRayas(palabras[indice]);
 		
@@ -179,9 +177,9 @@ class LaminaAhorcado extends JPanel{
 			StringBuilder palabraActualizada=new StringBuilder(palabraConRayasSTR);
 			
 			
-			for (int i = 0; i < palabraEscogida.length(); i++) {
+			for (int i = 0; i < palabraEscogida(palabras[indice]).length(); i++) {
 				
-				char c=palabraEscogida.charAt(i);
+				char c=palabraEscogida(palabras[indice]).charAt(i);
 				
 				
 				if(letraPulsada.equals(String.valueOf(c))) {
@@ -346,6 +344,13 @@ class LaminaAhorcado extends JPanel{
 		
 		return nuevaPalabra;
 		
+	}
+	
+	public static String palabraEscogida(String palabra) {
+		
+		String palabraEsc=palabra;
+		
+		return palabraEsc;
 	}
 	
 }
