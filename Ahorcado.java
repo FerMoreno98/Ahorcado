@@ -3,6 +3,8 @@ package Interfaz;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class Ahorcado {
@@ -49,13 +51,17 @@ class LaminaAhorcado extends JPanel{
 	
 	private int indice=0;
 	
-	private String palabraEscogida=palabras[indice];
+	private String palabraEscogida;
 	
-	private JButton boton;
+	private JButton boton, contador;
 	
 	private JLabel palabraConRayas;
 	
-	private String palabraConRayasSTR=crearRayas(palabras[indice]);
+	private String palabraConRayasSTR;
+	
+	private int cont=0;
+	
+	ArrayList<JButton> botones=new ArrayList<>();
 	
 	public LaminaAhorcado() {
 		
@@ -123,6 +129,9 @@ class LaminaAhorcado extends JPanel{
 		
 		add(laminaLetras,BorderLayout.SOUTH);
 		
+		palabraEscogida=palabras[indice];
+		
+		palabraConRayasSTR=crearRayas(palabras[indice]);
 		
 		palabraConRayas=new JLabel(palabraConRayasSTR);
 		
@@ -147,6 +156,8 @@ class LaminaAhorcado extends JPanel{
 		laminaLetras.add(boton);
 		
 		boton.addActionListener(new AccionLetras());
+		
+		botones.add(boton);
 		
 	}
 	
@@ -177,11 +188,13 @@ class LaminaAhorcado extends JPanel{
 					
 					botonPulsado.setBackground(Color.green);
 					
+					botonPulsado.setActionCommand("verde");
+					
 					palabraActualizada.setCharAt(i, c);
 					
 					letraCorrecta=true;
 					
-					//break;
+					
 				
 				}
 				
@@ -192,13 +205,86 @@ class LaminaAhorcado extends JPanel{
 			
 			palabraConRayasSTR=palabraActualizada.toString();
 			
-			
+			if(!palabraConRayasSTR.contains("-")) {
+				
+				JOptionPane.showConfirmDialog(LaminaAhorcado.this, "¿Deseas continuar");
+				
+				indice++;
+				
+				palabraConRayasSTR=crearRayas(palabras[indice]);
+				
+				palabraConRayas.setText(palabraConRayasSTR);
+				
+				boolean verde=botonPulsado.getActionCommand()=="verde";
+				
+				boolean rojo=botonPulsado.getActionCommand()=="rojo";
+				
+				Color defaultBackground = UIManager.getColor("Button.background");
+				
+				for (JButton b:botones) {
+					
+					if(verde) {
+						
+						b.setBackground(defaultBackground);
+						
+					}
+					
+					if(rojo) {
+						
+						b.setBackground(defaultBackground);
+					}
+					
+				}
+				
+			}
 			
 			
 			if(!letraCorrecta) {
 				
 				botonPulsado.setBackground(Color.red);
 				
+				botonPulsado.setActionCommand("rojo");
+				
+				cont++;
+				
+			}
+			
+			if (cont==4) {
+				
+				cont=0;
+				
+				JOptionPane.showConfirmDialog(LaminaAhorcado.this, "¿Desea continuar");
+				
+				indice++;
+				
+				boolean verde=botonPulsado.getActionCommand()=="verde";
+				
+				boolean rojo=botonPulsado.getActionCommand()=="rojo";
+				
+				Color defaultBackground = UIManager.getColor("Button.background");
+				
+				for (JButton b:botones) {
+					
+					if(verde) {
+						
+						b.setBackground(defaultBackground);
+						
+					}
+					
+					if(rojo) {
+						
+						b.setBackground(defaultBackground);
+					}
+					
+				}
+					
+				
+				
+				palabraConRayasSTR=crearRayas(palabras[indice]);
+				
+				palabraConRayas.setText(palabraConRayasSTR);
+				
+				//crearRayas(palabraEscogida);
 			}
 			
 			
