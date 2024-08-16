@@ -47,7 +47,7 @@ class LaminaAhorcado extends JPanel{
 	
 	private JPanel laminaLetras;
 	
-	private String [] palabras= {"camarero", "fotografia", "monitor", "bufanda"};
+	private String [] palabras= {"camarero", "fotografia"};
 	
 	private int indice=0;
 	
@@ -167,6 +167,8 @@ class LaminaAhorcado extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
+		
+			
 			JButton botonPulsado=(JButton)e.getSource();
 			
 			String letraPulsada=botonPulsado.getText();
@@ -207,9 +209,20 @@ class LaminaAhorcado extends JPanel{
 				
 				JOptionPane.showConfirmDialog(LaminaAhorcado.this, "¿Deseas continuar");
 				
-				indice++;
+			
 				
+				indice++;
+			
+				try {
+					
 				palabraConRayasSTR=crearRayas(palabras[indice]);
+				
+				}catch(Exception e2) {
+					
+					JOptionPane.showMessageDialog(LaminaAhorcado.this, "Palabras terminadas");
+					
+					System.exit(1);
+				}
 				
 				palabraConRayas.setText(palabraConRayasSTR);
 				
@@ -247,7 +260,7 @@ class LaminaAhorcado extends JPanel{
 				
 			}
 			
-			if (cont==4) {
+			if (cont==10 && indice!=palabras.length) {
 				
 				cont=0;
 				
@@ -277,10 +290,18 @@ class LaminaAhorcado extends JPanel{
 				}
 					
 				
-				
+				try {
 				palabraConRayasSTR=crearRayas(palabras[indice]);
 				
 				palabraConRayas.setText(palabraConRayasSTR);
+				
+				}catch(ArrayIndexOutOfBoundsException s) {
+					
+					JOptionPane.showMessageDialog(LaminaAhorcado.this, "Palabras terminadas");
+					
+					System.exit(1);
+					
+				}
 				
 				//crearRayas(palabraEscogida);
 			}
@@ -288,8 +309,9 @@ class LaminaAhorcado extends JPanel{
 			
 			
 		}
+			}
 		
-	}
+	
 	
 	
 	/*public void paintComponent(Graphics g) {
